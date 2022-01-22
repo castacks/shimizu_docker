@@ -6,17 +6,23 @@
 
 # Arguments.
 ARG base_image
-ARG user_id
-ARG group_id
-ARG user_name
-ARG group_name
 
 FROM ${base_image}
 
 # Add a user with the same user_id as the user outside the container
 
+ARG user_id
+ARG user_name
+ARG group_id
+ARG group_name
+
+RUN echo "user_id=${user_id}" \
+ && echo "user_name=${user_name}" \
+ && echo "group_od=${group_id}" \
+ && echo "group_name=${group_name}"
+
 # Create new group if it doesn't already exist.
-RUN if [ $(getent group ${group_id}) ]; then groupadd -g ${group_id} ${group_name}; fi
+RUN ["/bin/bash", "-c", "if [[ -z \"$(getent group ${group_id})\" ]]; then groupadd -g ${group_id} ${group_name}; fi"]
 
 # Create a new user.
 RUN useradd --uid ${user_id} --gid ${group_id} -ms /bin/bash ${user_name} \
