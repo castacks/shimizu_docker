@@ -37,8 +37,9 @@ docker run --rm \
     -it \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$XAUTH:$XAUTH" \
-    --volume="/home/$USER/ROS/shimizu_mesh:/ws" \
-    --volume="/home/$USER/Experiments/:/data" \
+    --volume="/$HOME/ROS/shimizu_reconstruction/:/ws/" \
+    --volume="/$HOME/Playground/:/data/" \
+    --volume-"/$HOME/Libraries/:/libraries/" \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --env="XAUTHORITY=$XAUTH" \
@@ -46,7 +47,7 @@ docker run --rm \
     --env="NVIDIA_DRIVER_CAPABILITIES=all" \
     --net=host \
     --privileged \
-    --runtime=nvidia \
+    --gpus=all \
     --group-add audio \
     $1 \
     /bin/bash
