@@ -39,7 +39,7 @@ docker run --rm \
     --volume="$XAUTH:$XAUTH" \
     --volume="/$HOME/ROS/shimizu_reconstruction/:/ws/" \
     --volume="/$HOME/Playground/:/data/" \
-    --volume-"/$HOME/Libraries/:/libraries/" \
+    --volume="/$HOME/Libraries/:/libraries/" \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --env="XAUTHORITY=$XAUTH" \
