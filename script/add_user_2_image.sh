@@ -16,6 +16,7 @@ echo "group_id   = ${GROUP_ID}"
 echo "group_name = ${GROUP_NAME}"
 
 docker build \
+    --network=host \
     -f ${DOCKER_FILE} \
     -t ${TARGET} \
     --build-arg base_image=${BASE_IMAGE} \
